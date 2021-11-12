@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import Form from "./components/Form";
+import Images from "./components/Images";
 
 function App() {
   const [search, setSearch] = useState("");
-  console.log(search);
+  const [images, setImages] = useState([]);
+  console.log(images);
 
   useEffect(() => {
     if (search === "") return;
@@ -14,7 +16,7 @@ function App() {
       const res = await fetch(url);
       const json = await res.json();
       const hits = json.hits;
-      setSearch(hits);
+      setImages(hits);
     };
 
     fetchAPI();
@@ -24,6 +26,9 @@ function App() {
       <div className="jumbotron mt-5">
         <p className="lead text-center">Buscador de Imágenes</p>
         <Form setSearch={setSearch} />
+      </div>
+      <div className="row justify-content-center">
+        <Images images={images} />
       </div>
     </div>
   );

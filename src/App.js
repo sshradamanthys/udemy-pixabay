@@ -5,7 +5,10 @@ import Images from "./components/Images";
 function App() {
   const [search, setSearch] = useState("");
   const [images, setImages] = useState([]);
-  console.log(images);
+  // pagination
+  // const [actual, setActual] = useState(1);
+  const [total, setTotal] = useState(5);
+  console.log(images, total);
 
   useEffect(() => {
     if (search === "") return;
@@ -16,7 +19,13 @@ function App() {
       const res = await fetch(url);
       const json = await res.json();
       const hits = json.hits;
+
+      const totalHits = json.totalHits;
       setImages(hits);
+
+      // calculating total
+      const pagesTotal = Math.ceil(totalHits / pages);
+      setTotal(pagesTotal);
     };
 
     fetchAPI();

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Error from "./Error";
 
-const Form = () => {
+const Form = ({ setSearch }) => {
   const [state, setState] = useState("");
   const [error, setError] = useState(false);
 
@@ -11,7 +11,7 @@ const Form = () => {
       setError(true);
     }
     setError(false);
-    // setSearch(state);
+    setSearch(state);
   };
 
   return (
